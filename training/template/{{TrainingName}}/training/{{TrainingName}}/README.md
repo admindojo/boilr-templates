@@ -1,11 +1,11 @@
 ---
-id: {{category}}-{{application}}-{{level}}-{{count}}-{{distribution}}
-title: {{title}}
+id: {{TrainingName}}
+title: {{Title}}
 ---
 
 {{Summary}}
 
-Training ID: *{{category}}-{{application}}-{{level}}-{{count}}-{{distribution}}*
+Training ID: *{{TrainingName}}*
 
 # *THIS FILE IS THE PUBLIC TRAINING DESCRIPTION* (remove this line)
 # *USE THIS FILE AS TEMPLATE. PLEASE FOLLOW THE SAME STUCTURE* (remove this line)

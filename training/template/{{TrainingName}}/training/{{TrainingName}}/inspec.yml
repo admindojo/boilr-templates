@@ -1,10 +1,10 @@
-name: {{category}}-{{application}}-{{level}}-{{count}}-{{distribution}}
-title: {{title}}
+name: {{TrainingName}}
+title: {{Title}}
 maintainer: admindjojo
 copyright:
 copyright_email:
 license: Apache-2.0
-summary: {{summary}}
+summary: {{Summary}}
 version: 0.1.0
 supports:
   platform: os
