@@ -4,3 +4,6 @@
 # Overwrite config.x settings
 # Example:
 # config.vm.synced_folder "../admindojo/config", "/overwrite"
+{{ if eq OS "Ubuntu 18" }}
+config.vm.box = "bionic64"
+{{ end }}
