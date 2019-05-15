@@ -1,90 +1,76 @@
----
-id: {{TrainingName}}
-title: {{Title}}
----
+<div class="jumbotron">
+    <h1 class="display-4 text-left">{{TrainingName}}</h1>
+    <p class="lead text-left">{{Summary}}</p>
+</div>
 
-{{Summary}}
-
-Training ID: *{{TrainingName}}*
 
 # *THIS FILE IS THE PUBLIC TRAINING DESCRIPTION* (remove this line)
 # *USE THIS FILE AS TEMPLATE. PLEASE FOLLOW THE SAME STUCTURE* (remove this line)
 
-## Objectives
+<h2 class="display-4">Objectives</h2>
+
 - setup a apache web server with default configuration
 - serve a website that contains `Hello World!`as landing-page (plaintext, no need for HTML).
 - make your website accessible via SSL (a simple selfsigned-snakeoil cert is ok)
 
-## Detailed explanation (spoilers)
-### About Apache
-<details><summary>click to show</summary>
-<p>
+<h2 class="display-4">Notes</h2>
 
-The Apache HTTP Server or short just *Apache* is one of the internets first, and most used, web server. Originally based on the *NCSA HTTPd* server, 
-you'll still find it referenced as *httpd*(**H**yper**t**ext **T**ransfer **P**rotocol **d**aemon).
+- Please reboot your VM via `vagrant reload` inside the training directory - not `reboot` -  to [mount required directories](https://github.com/hashicorp/vagrant/issues/1845)
+- ..
 
-One reason of it's popularity is the ability to quickly add features through dynamically loadable modules. However, this also makes it a bit 
-clunky compared to alternatives like nginx, which is optimized for performance. 
+<h2 class="display-4">Walkthrough</h2>
 
-Apache is also part of the popular *LAMP* Stack - which is a bundle of **L**inux, **A**pache, **M**ySQL, and **P**HP". Generally speaking this refers to installing:
-- an operating system
-- a web server
-- a database
-- and an interpreter to create dynamic websites (without it, a web server usually just serves HTML content only)
+??? lead "add sub-topic here"
 
-External resources
-- [Apache's website](https://httpd.apache.org/)
-- [nginx's website](https://www.nginx.com/resources/wiki/)
-- [nginx's take on "nginx vs. apache"](https://www.nginx.com/blog/nginx-vs-apache-our-view/)
-- [An overview of popular Webservers](https://maccablo.com/web-servers-a-detailed-overview-popular-webservers/)
-- [Wikipedia: LAMP](https://en.wikipedia.org/wiki/LAMP_(software_bundle))
-</p>
-</details>
+    <div class="alert alert-secondary" role="alert">
 
-### Starting and controlling apache
-<details><summary>click to show</summary>
-<p>
+    Disks are organized in partitions. Partitions than have a filesystem that is used to store the files.
+    
+    While it is possible to create a [RAID of whole disks](https://raid.wiki.kernel.org/index.php/Partition_Types), there is no 100% right answer whether to [use whole disks or partitions](https://unix.stackexchange.com/questions/320103/whats-the-difference-between-creating-mdadm-array-using-partitions-or-the-whole). 
+    For this training, we'll go with partitions. By using partitions we're able to precisely specifying the size to 1000MB each. 
+    
+    To list all available disks, [fdisk](https://manpages.ubuntu.com/manpages/xenial/en/man8/fdisk.8.html) can be used.
+    Since everything in Linux is a file, disks have a path too. Once you know the path of both disk, you can use [cfdisk](https://manpages.ubuntu.com/manpages/xenial/en/man8/cfdisk.8.html) to create a partition.
+    
+    While fdisk can be used for partitioning as well, cfdisk provides a simple graphical interface.
+    
+    </div>
+    
+??? lead "add sub-topic here"
+    
+    <div class="alert alert-secondary" role="alert">
 
-There are a few ways to manage programs in Linux. To understand older tutorials and books, you should know some of them.
-The full story is quite complex and an interesting read for later. For now, just remember that 
-`systemctrl` should always do the trick. 
-
-- `sudo service programX start` This was the *old* command till Ubuntu 14.10. Used with SysVinit.
-- `sudo systemctl start programX` This is the modern and universal approach. Used by systemd - a system and service manager.
-
-
-There is even an extra program to control apache:
-- `sudo apache2ctrl start` Since Ubuntu 16.04 this is already replaced and liked to the `systemctl` command.
-
-
-Additional info:
-- To check the status of a program, use `sudo systemctl status programX`
-- Not all programs are stating automatically during the system start-up. Use `sudo systemctl enable programX` to enable the autostart.
-
-External resources
-- [Discussion: Difference between systemctl init.d and service](https://askubuntu.com/a/911543)
-- [Commands SysVinit vs Systemd ](https://fedoraproject.org/wiki/SysVinit_to_Systemd_Cheatsheet)
-</p>
-</details>
-
-### Accessing websites from terminal
-<details><summary>click to show</summary>
-<p>
-
-Since you're in a terminal, you'll have to judge the status of websites by text-information only. There are a few tools for that e.g. :
-
-- curl: a tool that can handle almost every internet-related protocol
-- lynx: a text-based web-browser. It can't handle complex/modern websites or technologies. But it'll give you a visual representation of the website
-
-Always keep in mind what information you're interested in. E.g:
-- accessing "localhost" will only give you a status of the local web server. Users will access your web server via it's public IP or FQDN
-- web servers will always send response status codes(e.g. 200 or 404). These codes are only visible in the HTTP header fields. Try `curl -v`
-- ports and protocols are important. When checking websites, also check what protocol(e.g. try `curl -v http://wikipedia.com:443`)
-
-
-External resources
-- [HTTP headers - by Mozilla](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers)  
-- [HTTP response status codes - by Mozilla](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
-
-</p>
-</details>
+    btrfs is a modern filesystem for Linux that implements advanced features like:
+    
+    - Snapshots
+    - Checksums
+    - Integrated multi-device spanning(RAID like features)
+    - Compression
+    - Deduplication
+    
+    While Brtfs provides these advanced features, it's development status is heavily discussed inside the community. Because some of its features are
+    still not ready for production its still not the default filesystem on Linux distributions. [openSUSE](https://en.opensuse.org/SDB:BTRFS) is one of the few that comes with Btrfs by default.
+    RedHat [publicly announced](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/7.4_Release_Notes/chap-Red_Hat_Enterprise_Linux-7.4_Release_Notes-Deprecated_Functionality.html) the removal of Brtfs support 2017
+    
+    Despite the development status of some features, Btrfs is sill used by many.
+    As long as the sysadmin is aware of the [known issues](https://wiki.debian.org/Btrfs#Warnings), the functional features outweigh the disadvantages of older filesystems like ext4. 
+    
+    Using Brtfs with RAID is an example of these known issues and shows why it's important to check the [Btrfs Statuspage](https://btrfs.wiki.kernel.org/index.php/Status). Even though Btfs is capable of setting up a RAID itself - the implementation is not fully developed. 
+    By checking the [Statuspage](https://btrfs.wiki.kernel.org/index.php/Status), you'll find RAID0, RAID1 and RAID10 marked as stable and RAID56 as unstable. Futher reading reveals the sidenote "reading from mirrors in parallel can be optimized further".
+    
+    One strategy to use Btrfs but avoid any issues of its RAID-feature is to not use the build-in RAID capability and relay on stable implementations like mdadm. 
+    This strategy is also used in this training.
+    
+    
+    Creating a btrfs filesystem is pretty easy: [mkfs.btrfs](https://btrfs.wiki.kernel.org/index.php/Manpage/mkfs.btrfs)
+    
+    `mkfs` was originally implemented 40 years ago and is still used for many filesystems in Linux. Running `mkfs.<fs-type>` supports most filesystems.
+    
+    External resources
+    
+    - [Btrfs Wiki - kernel.org](https://btrfs.wiki.kernel.org/index.php/Main_Page)
+    - [Brtfs Wiki - debian.org](https://wiki.debian.org/Btrfs)
+    - [Companies that use Btrfs in production](https://btrfs.wiki.kernel.org/index.php/Production_Users)
+    - [List of Btrfs features including development status](https://btrfs.wiki.kernel.org/index.php/Status)
+    
+    </div>
