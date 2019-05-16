@@ -6,7 +6,7 @@
 # control '1' do
 # 	impact 'critical'
 # 	title 'Install Apache' # task description
-# 	desc '' # detailed descriotion
+# 	desc '' # detailed description
 # 	tag duration: '10' # estimated time to complete task in min
 #   tag help: '' # optional URL to help
 #
