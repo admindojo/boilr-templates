@@ -1,5 +1,9 @@
 {
     "TrainingName": "category-application-level-count-distribution",
     "Title": "Title",
-    "Summary": "One sentence"
+    "Summary": "One sentence",
+    "TrainingType": [
+     "training",
+     "challenge"
+  ]
 }

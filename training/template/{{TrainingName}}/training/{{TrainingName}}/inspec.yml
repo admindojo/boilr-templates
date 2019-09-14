@@ -8,3 +8,6 @@ summary:
 version: 0.1.0
 supports:
   platform: os
+attributes:
+  - name: type
+    value: {{TrainingType}}
